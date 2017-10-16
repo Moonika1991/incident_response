@@ -1,0 +1,24 @@
+{extends file=$conf->root_path|cat:"/templates/main.html"}
+
+{block name=top}
+
+<div class="bottom-margin">
+<form id="searchForm" class="pure-form pure-form-stacked" onsubmit="ajaxPostForm('searchForm','{$conf->action_root}personListPart','tab_people'); return false;">
+	<legend>Opcje wyszukiwania</legend>
+	<fieldset>
+		<input type="text" placeholder="nazwisko" name="sf_surname" value="{$searchForm->surname}" /><br />
+		<button type="submit" class="pure-button pure-button-primary">Filtruj</button>
+	</fieldset>
+</form>
+</div>	
+
+{/block}
+
+{block name=bottom}
+
+<div class="bottom-margin">
+<a class="pure-button button-success" href="{$conf->action_root}personNew">+ Nowa osoba</a>
+</div>	
+{include file=$conf->root_path|cat:"/app/person/list/PersonListPart.html"}
+
+{/block}

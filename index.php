@@ -5,4 +5,4 @@ require_once dirname(__FILE__).'/init.php';
 //redirectTo('personList');
 
 //przekazanie żądania do obsługi akcji 'personList'
-forwardTo('personList');
+forwardTo('incidentList');

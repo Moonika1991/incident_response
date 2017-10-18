@@ -8,6 +8,15 @@ class LoginCtrl{
 		//stworzenie potrzebnych obiektów
 		$this->form = new LoginForm();
 	}
+    
+    private function getRoles($uid){
+        $roleNames = array();
+        $roles = getDb()->select('user_role',array ('rid'), array ('uid' => $uid));
+        foreach ($roles as $role){
+            $roleNames[] = getDb()->select('roles', array('role'), array('rid' => $role['rid']))[0]['role'];
+        }
+        return $roleNames;
+    }
 		
 	public function validate() {
 		$this->form->login = getFromRequest('login',true,'Błędne wywołanie systemu');
@@ -29,9 +38,12 @@ class LoginCtrl{
 		
 		// sprawdzenie, czy dane logowania poprawne
 		// (takie informacje najczęściej przechowuje się w bazie danych)
-        $user = getDb()->select('users',array('realname'),array('AND' => array('username' => $this->form->login, 'password' => $this->form->pass)));
+        $user = getDb()->select('users',array('uid'),array('AND' => array('username' => $this->form->login, 'password' => $this->form->pass)));
         if(count($user) > 0){
-			addRole('user');
+            foreach ($this->getRoles($user[0]['uid']) as $role){
+                addRole($role);
+            }
+			//addRole('user');
             //dodanie ról
         }
 		/*if ($this->form->login == "admin" && $this->form->pass == "admin") {
@@ -51,7 +63,7 @@ class LoginCtrl{
 			//zalogowany => przekieruj na główną akcję (z przekazaniem messages przez sesję)
 			getMessages()->addMessage(new Message('Poprawnie zalogowano do systemu',Message::INFO));
 			storeMessages();
-			redirectTo("personList");
+			redirectTo("incidentList");
 		} else {
 			//niezalogowany => pozostań na stronie logowania
 			$this->generateView(); 
@@ -65,7 +77,7 @@ class LoginCtrl{
 		session_start(); //rozpocznij nową sesję w celu przekazania messages w sesji
 		getMessages()->addMessage(new Message('Poprawnie wylogowano z systemu',Message::INFO));
 		storeMessages();
-		redirectTo('personList');
+		redirectTo('incidentList');
 	}
 	
 	public function generateView(){

@@ -31,7 +31,7 @@ switch ($action){
 	case 'personDelete':
 		control('/app/person/edit/','PersonEditCtrl','goDelete','admin'); //rola admin
 	case 'personListPart': //AJAX - wysłanie samej tabeli HTMLowej
-		control('/app/person/list/','PersonListCtrl','goShowPart','user'); // publiczna
-	default : //'personList' akcja domyślna
+		control('/app/person/list/','PersonListCtrl','goShowPart','admin'); // publiczna
+	default : //'incidentList' akcja domyślna
 		control('/app/incident/list/','IncidentListCtrl','goShow','user'); // publiczna
 }

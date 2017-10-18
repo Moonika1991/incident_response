@@ -1,0 +1,22 @@
+<table id="tab_inc_list">
+<thead>
+	<tr>
+		<th>Title</th>
+        <th>Date</th>
+        <th>Team</th>
+        <th>Solved</th>
+	</tr>
+</thead>
+<tbody>
+{foreach $incident as $i}
+{strip}
+	<tr>
+		<td>{$i["title"]}</td>
+		<td>{$i["date"]}</td>
+		<td>{$i["team"]}</td>
+		<td>{$i["solved"]}</td>
+	</tr>
+{/strip}
+{/foreach}
+</tbody>
+</table>

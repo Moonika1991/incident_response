@@ -9,13 +9,14 @@ h1 {
 table {
    /* margin-left: 50%;*/
     position: relative;
-    left: 5%;
+    left: 0%;
     border-collapse: collapse;
     width:50%;
     align-self: right;
     }
 table, th, td {
     border: 1px solid black;
+    text-align: center;
     }
 div {
     width: 90%;

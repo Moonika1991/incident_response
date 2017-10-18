@@ -2,12 +2,6 @@
 
 {block name=top}
 
-    <table>
-    <tr>
-        <th>Title</th>
-        <th>Date</th>
-        <th>Team</th>
-        <th>Solved</th>
-    </tr>
-    </table>
+{include file=$conf->root_path|cat:"/app/incident/list/IncidentListPart.html"}
+    
 {/block}

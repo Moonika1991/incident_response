@@ -11,9 +11,18 @@ class LoginCtrl{
     
     private function getRoles($uid){
         $roleNames = array();
+        $roleIds = array();
         $roles = getDb()->select('user_role',array ('rid'), array ('uid' => $uid));
-        foreach ($roles as $role){
-            $roleNames[] = getDb()->select('roles', array('role'), array('rid' => $role['rid']))[0]['role'];
+        foreach ($roles as $roleId){
+            $roleIds[] = $roleId['rid'];
+        }
+        foreach ($roleIds as $roleId){
+            foreach (getDb()->select('role_role', array('imported_id'), array('role_id' => $roleId)) as $role){
+                $roleIds[] = $role['imported_id'];
+            }
+        }
+        foreach ($roleIds as $role){
+            $roleNames[] = getDb()->select('roles', array('role'), array('rid' => $role))[0]['role'];
         }
         return $roleNames;
     }
@@ -38,20 +47,17 @@ class LoginCtrl{
 		
 		// sprawdzenie, czy dane logowania poprawne
 		// (takie informacje najczęściej przechowuje się w bazie danych)
-        $user = getDb()->select('users',array('uid'),array('AND' => array('username' => $this->form->login, 'password' => $this->form->pass)));
+        $user = getDb()->select('users',array('uid', 'realname'),array('AND' => array('username' => $this->form->login, 'password' => $this->form->pass)));
         if(count($user) > 0){
+            setUname($user[0][realname]);
+            setUid($user[0]['uid']);
             foreach ($this->getRoles($user[0]['uid']) as $role){
                 addRole($role);
             }
+            
 			//addRole('user');
             //dodanie ról
-        }
-		/*if ($this->form->login == "admin" && $this->form->pass == "admin") {
-			addRole('user');
-			addRole('admin');
-		} else if ($this->form->login == "user" && $this->form->pass == "user") {
-			addRole('user');
-		}*/ else {
+        } else {
 			getMessages()->addMessage(new Message('Niepoprawny login lub hasło',Message::ERROR));
 		}
 		

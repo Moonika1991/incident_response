@@ -66,6 +66,8 @@ class IncidentListCtrl {
 		// 4. dane dla widoku
 		// getSmarty()->assign('searchForm',$this->form); // dane formularza (wyszukiwania w tym wypadku)
 		getSmarty()->assign('incident',$this->records);  // lista rekordów z bazy danych
+        getSmarty()->assign('realname', getUname());
+
 	}
 	
 	function goShow(){

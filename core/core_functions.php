@@ -110,4 +110,16 @@ function loadData($name,$keep = false){
 	}
 	return null;
 }
+function setUid($uid){
+    $_SESSION['uid'] = $uid;
+}
+function getUid(){
+    return $_SESSION['uid'];
+}
+function setUname($username){
+    $_SESSION['username'] = $username;
+}
+function getUname(){
+    return $_SESSION['username'];
+}
 ?>

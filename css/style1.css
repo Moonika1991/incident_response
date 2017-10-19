@@ -8,10 +8,9 @@ h1 {
     }
 table {
    /* margin-left: 50%;*/
-    position: relative;
-    left: 0%;
+    float: left;
     border-collapse: collapse;
-    width:50%;
+    width: 49%;
     align-self: right;
     }
 table, th, td {
@@ -21,6 +20,11 @@ table, th, td {
 div {
     width: 90%;
     margin: 2em auto;
+}
+span{
+    padding-right: 30px;
+    font-size: 130%;
+    font-weight: bold;
 }
 .button{
     /*margin-left: 95%;*/
@@ -32,4 +36,13 @@ div {
     background-color: lightgrey;
     border-radius: 5px;
     padding: 5px 5px 5px 5px;
-}     
+} 
+.addWindow{
+    float: right;
+    border-style: solid;
+    width: 49%;
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    height:70vh;
+}

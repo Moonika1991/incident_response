@@ -54,6 +54,6 @@ class IncidentListCtrl {
 		getSmarty()->display(getConf()->root_path.'/app/incident/list/IncidentListPart.html');
 	}
     function goShowNew(){
-        getSmarty()->display(getConf()->root_path.'/app/incident/list/IncidentAddPart.html');
+        getSmarty()->display(getConf()->root_path.'/app/incident/add/IncidentAddPart.html');
     }
 }

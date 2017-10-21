@@ -25,7 +25,7 @@ switch ($action){
 	case 'newIncident':
 		control('/app/incident/list/','IncidentListCtrl','goShowNew','user'); //rola user
 	case 'addIncident':
-		control('/app/incident/list/','IncidentAddCtrl','goShowAdd','user'); //rola user
+		control('/app/incident/add/','IncidentAddCtrl','goShowAdd','user'); //rola user
 	case 'personSave':
 		control('/app/person/edit/','PersonEditCtrl','goSave','user'); //rola user
 	case 'personDelete':

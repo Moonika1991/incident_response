@@ -1,0 +1,10 @@
+<form id="addIncidentForm" class="pure-form pure-form-stacked">
+    <legend>Add new incident</legend>
+    Title: <br>
+    <input type="text"  name="title"> 
+    <br>
+    Problem description: <br>
+    <input type="text" name="description">
+    <br>
+</form>
+<button class="button" onclick="ajaxPostForm('addIncidentForm', '{$conf->action_root}addIncident', 'addWindow')">Save</button>

@@ -26,32 +26,6 @@ class IncidentListCtrl {
 	}
 	
 	public function process(){
-		// 1. Walidacja danych formularza (z pobraniem)
-		// - W tej aplikacji walidacja nie jest potrzebna, ponieważ nie wystąpią błedy podczas podawania nazwiska.
-		//   Jednak pozostawiono ją, ponieważ gdyby uzytkownik wprowadzał np. datę, lub wartość numeryczną, to trzeba
-		//   odpowiednio zareagować wyświetlając odpowiednią informację (poprzez obiekt wiadomości Messages)
-		//$this->validate();
-		
-		// 2. Przygotowanie mapy z parametrami wyszukiwania (nazwa_kolumny => wartość)
-		//$search_params = []; //przygotowanie pustej struktury (aby była dostępna nawet gdy nie będzie zawierała wierszy)
-		/*if ( isset($this->form->surname) && strlen($this->form->surname) > 0) {
-			$search_params['surname[~]'] = $this->form->surname.'%'; // dodanie symbolu % zastępuje dowolny ciąg znaków na końcu
-		}*/
-		
-		// 3. Pobranie listy rekordów z bazy danych
-		// W tym wypadku zawsze wyświetlamy listę osób bez względu na to, czy dane wprowadzone w formularzu wyszukiwania są poprawne.
-		// Dlatego pobranie nie jest uwarunkowane poprawnością walidacji (jak miało to miejsce w kalkulatorze)
-		
-		//przygotowanie frazy where na wypadek większej liczby parametrów
-		/*$num_params = sizeof($search_params);
-		if ($num_params > 1) {
-			$where = [ "AND" => &$search_params ];
-		} else {
-			$where = &$search_params;
-		}*/
-		//dodanie frazy sortującej po nazwisku
-		//$where ["ORDER"] = "surname";
-		//wykonanie zapytania
 		$this->records = getDB()->select("inc_list", [
 				"title",
                 "date",
@@ -78,5 +52,8 @@ class IncidentListCtrl {
 	function goShowPart(){ //dla AJAX
 		$this->process();
 		getSmarty()->display(getConf()->root_path.'/app/incident/list/IncidentListPart.html');
-	}	
+	}
+    function goShowNew(){
+        getSmarty()->display(getConf()->root_path.'/app/incident/list/IncidentAddPart.html');
+    }
 }

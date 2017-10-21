@@ -22,10 +22,10 @@ switch ($action){
 		control('/app/login/','LoginCtrl','doLogin'); // publiczna
 	case 'logout':
 		control('/app/login/','LoginCtrl','doLogout'); // publiczna
-	case 'personNew':
-		control('/app/person/edit/','PersonEditCtrl','generateView','user'); //rola user
-	case 'personEdit':
-		control('/app/person/edit/','PersonEditCtrl','goEdit','user'); //rola user
+	case 'newIncident':
+		control('/app/incident/list/','IncidentListCtrl','goShowNew','user'); //rola user
+	case 'addIncident':
+		control('/app/incident/list/','IncidentAddCtrl','goShowAdd','user'); //rola user
 	case 'personSave':
 		control('/app/person/edit/','PersonEditCtrl','goSave','user'); //rola user
 	case 'personDelete':

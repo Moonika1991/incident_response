@@ -1,4 +1,10 @@
-<div class = "addWindow">
-        
-</div>
- 
+<form id="addIncidentForm" onsubmit="ajaxPostForm('addIncidentForm', {$conf->action_root}addIncident', 'succed')">
+    <legend>Add new incident</legend>
+    Title: <br>
+    <input name"title" type="text"> 
+    <br>
+    Problem description: <br>
+    <input name="description" type="text">
+    <br>
+    <input type="submit" class="button" value="Save">
+</form>

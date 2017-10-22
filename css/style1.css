@@ -14,9 +14,17 @@ table {
     align-self: right;
     }
 table, th, td {
-    border: 1px solid black;
     text-align: center;
     }
+th, td {
+    border-bottom: 1px solid black;
+}
+th {
+    background-color: mediumseagreen;
+}
+tr:hover {
+    background-color: lightgray;
+}
 div {
     width: 90%;
     margin: 2em auto;

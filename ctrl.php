@@ -22,16 +22,16 @@ switch ($action){
 		control('/app/login/','LoginCtrl','doLogin'); // publiczna
 	case 'logout':
 		control('/app/login/','LoginCtrl','doLogout'); // publiczna
-	case 'newIncident':
-		control('/app/incident/list/','IncidentListCtrl','goShowNew','user'); //rola user
-	case 'addIncident':
-		control('/app/incident/add/','IncidentAddCtrl','goShowAdd','user'); //rola user
-	case 'personSave':
-		control('/app/person/edit/','PersonEditCtrl','goSave','user'); //rola user
+	case 'newRequest':
+		control('/app/request/list/','RequestListCtrl','goShowNew','user'); //rola user
+	case 'addRequest':
+		control('/app/request/window/addRequest/','RequestAddCtrl','goShowAdd','user'); //rola user
+	case 'showRequest':
+		control('/app/request/window/addRequest/','RequestAddCtrl','goShow','user'); //rola user
 	case 'personDelete':
 		control('/app/person/edit/','PersonEditCtrl','goDelete','admin'); //rola admin
 	case 'personListPart': //AJAX - wysłanie samej tabeli HTMLowej
 		control('/app/person/list/','PersonListCtrl','goShowPart','admin'); // publiczna
 	default : //'incidentList' akcja domyślna
-		control('/app/incident/list/','IncidentListCtrl','goShow','user'); // publiczna
+		control('/app/request/list/','RequestListCtrl','goShow','user'); // publiczna
 }

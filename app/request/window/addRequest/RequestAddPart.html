@@ -1,0 +1,10 @@
+<form id="requestAddForm">
+    <legend>Add new request</legend>
+    Title: <br>
+    <input type="text"  name="title"> 
+    <br>
+    Problem description: <br>
+    <input type="text" name="description">
+    <br>
+</form>
+<button class="button" onclick="ajaxPostForm('requestAddForm', '{$conf->action_root}addRequest', 'addWindow')">Save</button>

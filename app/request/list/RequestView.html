@@ -1,0 +1,9 @@
+{extends file=$conf->root_path|cat:"/templates/main.html"}
+
+{block name=top}
+
+{include file=$conf->root_path|cat:"/app/request/list/RequestListPart.html"}
+
+{include file=$conf->root_path|cat:"/app/request/window/EditWindow.html"}
+    
+{/block}

@@ -1,0 +1,24 @@
+<table id="tab_inc_list">
+<thead>
+	<tr>
+        <th>Request number</th>
+		<th>Title</th>
+        <th>Date</th>
+        <th>Team</th>
+        <th>Solved</th>
+	</tr>
+</thead>
+<tbody>
+{foreach $request as $r}
+{strip}
+	<tr onclick="ajaxReloadElement('addWindow', '{$conf->action_root}showRequest')">
+        <td>{$r["rid"]}</td>
+		<td>{$r["title"]}</td>
+		<td>{$r["date"]}</td>
+		<td>{$r["team"]}</td>
+		<td>{$r["solved"]}</td>
+	</tr>
+{/strip}
+{/foreach}
+</tbody>
+</table>

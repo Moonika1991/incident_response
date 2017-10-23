@@ -1,1 +1,14 @@
-<span>It worked</span>
+<header>
+    <span class="left_corner up">{$rid}</span>
+    <span class="right_corner up">Created: {$date}</span>
+</header>
+<div>
+    <h1>{$title}</h1>
+    <p>{$description}</p>
+    <div id="comment" class="comment"></div>
+</div>
+<footer>
+    <button class="button button_down" onclick="ajaxReloadElement('comment', '{$conf->action_root}addComment&rid={$rid}')">Add comment</button>
+</footer>
+
+    

@@ -11,7 +11,7 @@
 <tbody>
 {foreach $request as $r}
 {strip}
-	<tr onclick="ajaxReloadElement('addWindow', '{$conf->action_root}showRequest')">
+	<tr onclick="ajaxReloadElement('addWindow', '{$conf->action_root}showRequest&rid={$r['rid']}')">
         <td>{$r["rid"]}</td>
 		<td>{$r["title"]}</td>
 		<td>{$r["date"]}</td>

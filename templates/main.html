@@ -16,8 +16,8 @@
     <div class="pure-menu pure-menu-horizontal bottom-margin">
         {if count($conf->roles)>0}
 	   <span>Logged as {$realname}</span>
-	   <a href="{$conf->action_root}logout" class="pure-menu-heading pure-menu-link">Wyloguj</a>
-        <button class="button button_right" onclick="ajaxReloadElement('addWindow', '{$conf->action_root}newRequest')">Add new</button>
+	   <a href="{$conf->action_root}logout" class="pure-menu-heading pure-menu-link">Logout</a>
+        <button class="button button_up" onclick="ajaxReloadElement('addWindow', '{$conf->action_root}newRequest')">Add new</button>
         {else}	
 	   <a href="{$conf->action_root}loginShow" class="pure-menu-heading pure-menu-link">Zaloguj</a>
         {/if}

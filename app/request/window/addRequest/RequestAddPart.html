@@ -7,4 +7,4 @@
     <input type="text" name="description">
     <br>
 </form>
-<button class="button" onclick="ajaxPostForm('requestAddForm', '{$conf->action_root}addRequest', 'addWindow')">Save</button>
+<button class="button" onclick="ajaxPostForm('requestAddForm', '{$conf->action_root}addRequest', 'addWindow');ajaxReloadElement('tab_inc_list', '{$conf->action_root}showListPart')">Save</button>

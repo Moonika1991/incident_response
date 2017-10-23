@@ -27,11 +27,13 @@ switch ($action){
 	case 'addRequest':
 		control('/app/request/window/addRequest/','RequestAddCtrl','goShowAdd','user'); //rola user
 	case 'showRequest':
-		control('/app/request/window/addRequest/','RequestAddCtrl','goShow','user'); //rola user
-	case 'personDelete':
-		control('/app/person/edit/','PersonEditCtrl','goDelete','admin'); //rola admin
-	case 'personListPart': //AJAX - wysłanie samej tabeli HTMLowej
-		control('/app/person/list/','PersonListCtrl','goShowPart','admin'); // publiczna
+		control('/app/request/window/addComment/','RequestShowCtrl','goShow','user'); //rola user
+	case 'addComment':
+		control('/app/request/window/addComment/','RequestShowCtrl','addComment','user'); //rola admin
+    case 'saveComment':
+        control('/app/request/window/addComment/','RequestShowCtrl','saveComment','user');
+	case 'showListPart': //AJAX - wysłanie samej tabeli HTMLowej
+		control('/app/request/list/','RequestListCtrl','goShowPart','user'); // publiczna
 	default : //'incidentList' akcja domyślna
 		control('/app/request/list/','RequestListCtrl','goShow','user'); // publiczna
 }

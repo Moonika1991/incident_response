@@ -30,7 +30,4 @@ class RequestAddCtrl{
         $this->addToDb($this->form->title, $this->form->description);
         getSmarty()->display(getConf()->root_path.'/app/request/window/addRequest/RequestAddSucced.html'); 
     }
-    public function goShow(){
-        getSmarty()->display(getConf()->root_path.'/app/request/window/addComment/RequestShow.html');
-    }
 }

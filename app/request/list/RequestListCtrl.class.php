@@ -2,28 +2,7 @@
 
 class RequestListCtrl {
 
-	private $form; //dane formularza wyszukiwania
-	private $records; //rekordy pobrane z bazy danych
 
-	public function __construct(){
-		//stworzenie potrzebnych obiektów
-		//$this->form = new PersonSearchForm();
-	}
-		
-	public function validate() {
-		// 1. sprawdzenie, czy parametry zostały przekazane
-		// - nie trzeba sprawdzać
-		//$this->form->surname = getFromRequest('sf_surname');
-	
-		// 2. sprawdzenie poprawności przekazanych parametrów
-		// - nie trzeba sprawdzać
-
-		// 3. załaduj messages z sesji, jeśli jest (pozwala przekazywać komunikaty przez redirect)
-		loadMessages();
-		
-		return ! getMessages()->isError();
-	}
-	
 	public function process(){
 		$this->records = getDB()->select("req_list", [
                 "rid",

@@ -1,5 +1,5 @@
-<fiedset>
-    <input type="text" placeholder="comment" name="comment" value="{$commentForm->comment}" class="comment_input"/><br />
-    <button class="button" onclick="ajaxPostForm('commentForm', '{$conf->action_root}saveComment', 'addWindow'), ">Save</button>
-    <button class="button">Cancel</button>
-</fiedset>
+<form id="commentForm">
+    <input type="text" name="comment" class="comment_input"/><br />
+</form>
+<button class="button" onclick="ajaxPostForm('commentForm', '{$conf->action_root}saveComment&rid={$rid}', 'addWindow') ">Save</button>
+<button class="button" onclick="ajaxReloadElement('addWindow', '{$conf->action_root}showRequest&rid={$rid}')">Cancel</button>

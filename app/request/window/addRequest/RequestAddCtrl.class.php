@@ -15,7 +15,7 @@ class RequestAddCtrl{
         loadMessages();
 		
 		return ! getMessages()->isError();
-    } 
+    }
     function addToDb($title, $description){
 
         getDb()->insert("req_list", ["title" => $title, "date" => date("Y-m-d"), "description" => $description, "team" => "helpdesk", "solved" => 0, "uid" => getUid()]);

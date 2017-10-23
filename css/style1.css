@@ -5,6 +5,7 @@ body {
     }
 h1 {
     text-align:center;
+    font-size: 1.5em;
     }
 table {
    /* margin-left: 50%;*/
@@ -31,8 +32,12 @@ div {
 }
 span{
     padding-right: 30px;
-    font-size: 130%;
+    font-size: 110%;
     font-weight: bold;
+}
+ul{
+    list-style-type: none;
+    font-size: 0.9em;
 }
 .button{
     color: black;
@@ -44,7 +49,7 @@ span{
 }
 .button_down{
     position: absolute;
-    bottom: 7%;
+    bottom: 9%;
     right: 2%;
 }
 .button_up{
@@ -83,7 +88,7 @@ span{
     float: left;
     width: 7%;
 }
-.comment{
+.comment_window{
     position: absolute;
     bottom: 10%;
 }

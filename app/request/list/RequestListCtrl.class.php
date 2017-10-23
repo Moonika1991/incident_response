@@ -1,7 +1,14 @@
 <?php
 
 class RequestListCtrl {
-
+    
+    function setTeamList(){
+        if(inRole("helpdesk")){
+            $this->teams = getDb()->select("roles", ["role"]);
+        
+            getSmarty()->assign('teams', $this->teams);
+        }
+    }
 
 	public function process(){
 		$this->records = getDB()->select("req_list", [
@@ -31,6 +38,7 @@ class RequestListCtrl {
 		getSmarty()->display(getConf()->root_path.'/app/request/list/RequestListPart.html');
 	}
     function goShowNew(){
+        $this->setTeamList();
         getSmarty()->display(getConf()->root_path.'/app/request/window/addRequest/RequestAddPart.html');
     }
 }

@@ -12,17 +12,23 @@ class LoginCtrl{
     private function getRoles($uid){
         $roleNames = array();
         $roleIds = array();
-        $roles = getDb()->select('user_role',array ('rid'), array ('uid' => $uid));
+        $roles = getDb()->select('user_role',['rid'], ['uid' => $uid]);
         foreach ($roles as $roleId){
             $roleIds[] = $roleId['rid'];
         }
-        foreach ($roleIds as $roleId){
-            foreach (getDb()->select('role_role', array('imported_id'), array('role_id' => $roleId)) as $role){
-                $roleIds[] = $role['imported_id'];
+        $rolesChecked = array();
+        $rolesToCheck =$roleIds;
+        while (count($rolesToCheck) != 0){
+            foreach($rolesToCheck as $roleId){
+                foreach (getDb()->select('role_role', ['imported_id'], ['role_id' => $roleId]) as $role){
+                    $roleIds[] = $role['imported_id'];
+                }
+                $rolesChecked[] = $roleId;
             }
+            $rolesToCheck = array_diff($roleIds, $rolesChecked);
         }
         foreach ($roleIds as $role){
-            $roleNames[] = getDb()->select('roles', array('role'), array('rid' => $role))[0]['role'];
+            $roleNames[] = getDb()->select('roles', ['role'], ['rid' => $role])[0]['role'];
         }
         return $roleNames;
     }
@@ -49,7 +55,7 @@ class LoginCtrl{
 		// (takie informacje najczęściej przechowuje się w bazie danych)
         $user = getDb()->select('users',array('uid', 'realname'),array('AND' => array('username' => $this->form->login, 'password' => $this->form->pass)));
         if(count($user) > 0){
-            setUname($user[0][realname]);
+            setUname($user[0]['realname']);
             setUid($user[0]['uid']);
             foreach ($this->getRoles($user[0]['uid']) as $role){
                 addRole($role);

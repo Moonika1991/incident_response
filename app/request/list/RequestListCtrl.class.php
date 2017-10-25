@@ -5,6 +5,7 @@ class RequestListCtrl {
     function setTeamList(){
         if(inRole("helpdesk")){
             $this->teams = getDb()->select("roles", ["role"]);
+            unset($this->teams[0]);
         
             getSmarty()->assign('teams', $this->teams);
         }

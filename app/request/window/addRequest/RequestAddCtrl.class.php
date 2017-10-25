@@ -12,13 +12,23 @@ class RequestAddCtrl{
         $this->form->title = getFromRequest('title');
         $this->form->description = getFromRequest('description');
         
+        if (inRole('helpdesk')){
+            $this->form->team = getFromRequest('team');
+        }
+        
         loadMessages();
 		
 		return ! getMessages()->isError();
     }
     function addToDb($title, $description){
+        
+        if(inRole('helpdesk')){
+            getDb()->insert("req_list", ["title" => $title, "date" => date("Y-m-d"), "description" => $description, "team" => $this->form->team, "solved" => 0, "uid" => getUid()]);
+        } else {
+            
+            getDb()->insert("req_list", ["title" => $title, "date" => date("Y-m-d"), "description" => $description, "team" => "helpdesk", "solved" => 0, "uid" => getUid()]);
+        }
 
-        getDb()->insert("req_list", ["title" => $title, "date" => date("Y-m-d"), "description" => $description, "team" => "helpdesk", "solved" => 0, "uid" => getUid()]);
         
         if (getDB()->error()[0]!=0){ //jeśli istnieje kod błędu
 			getMessages()->addMessage(new Message('Wystąpił błąd podczas zapisywania rekordów',Message::ERROR));

@@ -14,7 +14,7 @@
 	<tr onclick="ajaxReloadElement('addWindow', '{$conf->action_root}showRequest&rid={$r['rid']}')">
         <td>{$r["rid"]}</td>
 		<td>{$r["title"]}</td>
-		<td>{$r["date"]}</td>
+		<td>{strftime("%d-%m-%Y", $r["datetime"])}</td>
 		<td>{$r["team"]}</td>
 		<td>{$r["solved"]}</td>
 	</tr>

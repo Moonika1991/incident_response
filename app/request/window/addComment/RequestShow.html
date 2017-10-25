@@ -1,10 +1,15 @@
 <header>
     <span class="left_corner up">{$rid}</span>
-    <span class="right_corner up">Created: {$date}</span>
+    <span class="right_corner up">Created: {strftime("%d-%m-%Y", $date)}</span>
 </header>
 <div>
     <h1>{$title}</h1>
-    <p>{$description}</p>
+    <ul>
+        <li>{$realname}</li>
+            <ul>
+                <li>{$description}</li>
+            </ul>
+    </ul>
     <div>
         {foreach $comments as $c}
             <ul>

@@ -11,6 +11,7 @@ class RequestAddCtrl{
     public function validate(){
         $this->form->title = getFromRequest('title');
         $this->form->description = getFromRequest('description');
+        $this->form->type = getFromRequest('type');
         
         if (inRole('helpdesk')){
             $this->form->team = getFromRequest('team');
@@ -23,10 +24,10 @@ class RequestAddCtrl{
     function addToDb($title, $description){
         
         if(inRole('helpdesk')){
-            getDb()->insert("req_list", ["title" => $title, "date" => date("Y-m-d"), "description" => $description, "team" => $this->form->team, "solved" => 0, "uid" => getUid()]);
+            getDb()->insert("req_list", ["title" => $title, "datetime" => time(), "description" => $description, "team" => $this->form->team, "solved" => 0, "uid" => getUid(), "rtid" => $this->form->type]);
         } else {
             
-            getDb()->insert("req_list", ["title" => $title, "date" => date("Y-m-d"), "description" => $description, "team" => "helpdesk", "solved" => 0, "uid" => getUid()]);
+            getDb()->insert("req_list", ["title" => $title, "datetime" => time(), "description" => $description, "team" => "helpdesk", "solved" => 0, "uid" => getUid(),"rtid" => $this->form->type]);
         }
 
         

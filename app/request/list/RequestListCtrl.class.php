@@ -4,18 +4,25 @@ class RequestListCtrl {
     
     function setTeamList(){
         if(inRole("helpdesk")){
-            $this->teams = getDb()->select("roles", ["role"]);
+            $this->teams = getDb()->select("roles", ["rid", "role"]);
             unset($this->teams[0]);
+            unset($this->teams[1]);
         
             getSmarty()->assign('teams', $this->teams);
         }
+    }
+    
+    function setRequestType(){
+        $this->types = getDb()->select("req_type", ["rtid", "name"]);
+        
+        getSmarty()->assign("types", $this->types);
     }
 
 	public function process(){
 		$this->records = getDB()->select("req_list", [
                 "rid",
 				"title",
-                "date",
+                "datetime",
                 "team",
                 "solved",
 			]);
@@ -24,7 +31,7 @@ class RequestListCtrl {
 			if (getConf()->debug) getMessages()->addMessage(new Message(var_export(getDB()->error(), true),Message::ERROR));
 		}
 
-		getSmarty()->assign('request',$this->records);  // lista rekordów z bazy danych
+		getSmarty()->assign('request',$this->records);
         getSmarty()->assign('realname', getUname());
 
 	}
@@ -40,6 +47,7 @@ class RequestListCtrl {
 	}
     function goShowNew(){
         $this->setTeamList();
+        $this->setRequestType();
         getSmarty()->display(getConf()->root_path.'/app/request/window/addRequest/RequestAddPart.html');
     }
 }

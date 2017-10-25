@@ -37,8 +37,9 @@ class RequestShowCtrl{
     public function getFromDB(){
         $this->rid=getFromGet('rid');
         
-        $this->records = getDb()->select("req_list", ["title", "date", "description", "team", "solved", "uid"], ["rid" => $this->rid]);
+        $this->records = getDb()->select("req_list", ["title", "datetime", "description", "team", "solved", "uid"], ["rid" => $this->rid]);
         
+        $this->realname = getDb()->select("users", ["realname"], ["uid" => $this->records[0]["uid"]]);
         $this->comments = getDb()->select("comments", ["[>]users" => ["user" => "uid"]], ["users.realname", "comments.comment", "comments.date"], ["comments.req" => $this->rid]);
         //print_r($this->comments);
         //die();
@@ -49,8 +50,9 @@ class RequestShowCtrl{
 		}
         
         getSmarty()->assign('rid',$this->rid);
-        getSmarty()->assign('date', $this->records[0]["date"]);
+        getSmarty()->assign('date', $this->records[0]["datetime"]);
         getSmarty()->assign('title', $this->records[0]["title"]);
+        getSmarty()->assign('realname', $this->realname[0]["realname"]);
         getSmarty()->assign('description', $this->records[0]["description"]);
         getSmarty()->assign('comments', $this->comments);
     }

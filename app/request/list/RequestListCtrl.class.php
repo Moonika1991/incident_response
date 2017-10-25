@@ -19,12 +19,12 @@ class RequestListCtrl {
     }
 
 	public function process(){
-		$this->records = getDB()->select("req_list", [
-                "rid",
-				"title",
-                "datetime",
-                "team",
-                "solved",
+		$this->records = getDB()->select("req_list", ["[>]roles" => ["team" => "rid"]],[
+                "req_list.reqid",
+				"req_list.title",
+                "req_list.datetime",
+                "roles.role",
+                "req_list.progress",
 			]);
 		if (getDB()->error()[0]!=0){ //jeśli istnieje kod błędu
 			getMessages()->addMessage(new Message('Wystąpił błąd podczas pobierania rekordów',Message::ERROR));

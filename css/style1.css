@@ -96,3 +96,15 @@ ul{
     margin-bottom: 5px;
     width: 47%;
 }
+.description{
+    margin-bottom: 5px;
+    width: 90%;
+    height: 5em;
+}
+.request_form{
+    margin-left: 5px;
+    margin-bottom: 5px;
+}
+.title{
+    width: 90%;
+}

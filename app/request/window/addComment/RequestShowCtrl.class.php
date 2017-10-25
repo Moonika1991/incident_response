@@ -19,14 +19,14 @@ class RequestShowCtrl{
         return !getMessages()->isError();
     }
     
-    function setRid(){
-        $this->rid=getFromGet('rid');
-        getSmarty()->assign('rid', $this->rid);
+    function setReqid(){
+        $this->reqid=getFromGet('reqid');
+        getSmarty()->assign('reqid', $this->reqid);
     }
     
-    public function addToDb($comment, $rid){
+    public function addToDb($comment, $reqid){
         
-        getDb()->insert("comments", ["req" => $rid, "user" => getUid(), "comment" => $comment]);
+        getDb()->insert("comments", ["req" => $reqid, "user" => getUid(), "comment" => $comment, "date" => date("Y-m-d h:i:sa")]);
         
         if (getDB()->error()[0]!=0){ //jeśli istnieje kod błędu
 			getMessages()->addMessage(new Message('Wystąpił błąd podczas pobierania rekordów',Message::ERROR));
@@ -35,12 +35,12 @@ class RequestShowCtrl{
     }
     
     public function getFromDB(){
-        $this->rid=getFromGet('rid');
+        $this->reqid=getFromGet('reqid');
         
-        $this->records = getDb()->select("req_list", ["title", "datetime", "description", "team", "solved", "uid"], ["rid" => $this->rid]);
+        $this->records = getDb()->select("req_list", ["title", "datetime", "description", "team", "progress", "uid"], ["reqid" => $this->reqid]);
         
         $this->realname = getDb()->select("users", ["realname"], ["uid" => $this->records[0]["uid"]]);
-        $this->comments = getDb()->select("comments", ["[>]users" => ["user" => "uid"]], ["users.realname", "comments.comment", "comments.date"], ["comments.req" => $this->rid]);
+        $this->comments = getDb()->select("comments", ["[>]users" => ["user" => "uid"]], ["users.realname", "comments.comment", "comments.date"], ["comments.req" => $this->reqid]);
         //print_r($this->comments);
         //die();
         
@@ -49,7 +49,7 @@ class RequestShowCtrl{
 			if (getConf()->debug) getMessages()->addMessage(new Message(var_export(getDB()->error(), true),Message::ERROR));
 		}
         
-        getSmarty()->assign('rid',$this->rid);
+        getSmarty()->assign('reqid',$this->reqid);
         getSmarty()->assign('date', $this->records[0]["datetime"]);
         getSmarty()->assign('title', $this->records[0]["title"]);
         getSmarty()->assign('realname', $this->realname[0]["realname"]);
@@ -62,14 +62,14 @@ class RequestShowCtrl{
         getSmarty()->display(getConf()->root_path.'/app/request/window/addComment/RequestShow.html');
     }
     public function addComment(){
-        $this->setRid();
+        $this->setReqid();
 
         getSmarty()->display(getConf()->root_path.'/app/request/window/addComment/AddComment.html');
     }
     public function saveComment(){
         $this->validate();
-        $this->setRid();
-        $this->addToDb($this->form->comment, $this->rid);
+        $this->setReqid();
+        $this->addToDb($this->form->comment, $this->reqid);
         $this->goShow();
         //getSmarty()->display(getConf()->root_path.'/app/request/window/addComment/RequestShow.html');
     }

@@ -24,7 +24,7 @@ class RequestAddCtrl{
     function addToDb($title, $description){
         
         if(inRole('helpdesk')){
-            getDb()->insert("req_list", ["title" => $title, "datetime" => time(), "description" => $description, "team" => $this->form->team, "solved" => 0, "uid" => getUid(), "rtid" => $this->form->type]);
+            getDb()->insert("req_list", ["title" => $title, "datetime" => time(), "description" => $description, "team" => $this->form->team, "progress" => "new", "uid" => getUid(), "rtid" => $this->form->type]);
         } else {
             
             getDb()->insert("req_list", ["title" => $title, "datetime" => time(), "description" => $description, "team" => "helpdesk", "solved" => 0, "uid" => getUid(),"rtid" => $this->form->type]);

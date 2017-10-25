@@ -5,18 +5,18 @@
 		<th>Title</th>
         <th>Date</th>
         <th>Team</th>
-        <th>Solved</th>
+        <th>Progress</th>
 	</tr>
 </thead>
 <tbody>
 {foreach $request as $r}
 {strip}
-	<tr onclick="ajaxReloadElement('addWindow', '{$conf->action_root}showRequest&rid={$r['rid']}')">
-        <td>{$r["rid"]}</td>
+	<tr onclick="ajaxReloadElement('addWindow', '{$conf->action_root}showRequest&reqid={$r['reqid']}')">
+        <td>{$r["reqid"]}</td>
 		<td>{$r["title"]}</td>
 		<td>{strftime("%d-%m-%Y", $r["datetime"])}</td>
-		<td>{$r["team"]}</td>
-		<td>{$r["solved"]}</td>
+		<td>{$r["role"]}</td>
+		<td>{$r["progress"]}</td>
 	</tr>
 {/strip}
 {/foreach}

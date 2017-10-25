@@ -1,5 +1,5 @@
 <header>
-    <span class="left_corner up">{$rid}</span>
+    <span class="left_corner up">{$reqid}</span>
     <span class="right_corner up">Created: {strftime("%d-%m-%Y", $date)}</span>
 </header>
 <div>
@@ -24,7 +24,7 @@
     </div>
 </div>
 <footer>
-    <button class="button button_down" onclick="ajaxReloadElement('comment', '{$conf->action_root}addComment&rid={$rid}')">Add comment</button>
+    <button class="button button_down" onclick="ajaxReloadElement('comment', '{$conf->action_root}addComment&reqid={$reqid}')">Add comment</button>
 </footer>
 
     

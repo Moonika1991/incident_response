@@ -1,5 +1,5 @@
 body {
-    background-color:powderblue;
+    background-color: #e0ebeb;
     margin: 0;
     padding: 0;
     }
@@ -50,9 +50,10 @@ ul{
 .button_down{
     position: absolute;
     bottom: 9%;
-    right: 2%;
+    right: 3%;
 }
-.button_up{
+.fieldset{
+    border-style: none;
     position: absolute;
     top: 15%;
     right: 1%;
@@ -97,14 +98,62 @@ ul{
     width: 47%;
 }
 .description{
+    margin-top: 5px;
     margin-bottom: 5px;
     width: 90%;
     height: 5em;
 }
-.request_form{
+.form{
     margin-left: 5px;
     margin-bottom: 5px;
 }
-.title{
+.form_field{
+    margin-bottom: 5px;
     width: 90%;
+}
+.round{
+  border-radius: 5px;  
+}
+.legend{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: center;
+    font-weight: bold;
+}
+.image{
+    opacity: 0.3;
+    width: 100%;
+    height: 100%;
+}
+#admin_buttons{
+    border-style: none;
+}
+#user_id{
+    text-align: center;
+    border-style:inset;
+    border-radius: 5px;
+    background-color: #c2d6d6;
+    margin: 10px;
+    font-size: 0.9em;
+    font-weight: bold;
+    padding: 5px;
+    float: left;
+    width: 13%;
+}
+#show_user{
+    text-align: center;
+    padding-top: 7%;
+    line-height: 3em;
+    font-weight: bold;
+}
+#roles{
+    padding: 0;
+    margin-top: 0;
+    margin-left: 5%;
+    list-style-type: disc;
+}
+#roles_div{
+    padding-left: 5%;
+    font-weight: bold;
+    
 }

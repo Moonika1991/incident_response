@@ -32,8 +32,20 @@ switch ($action){
 		control('/app/request/window/addComment/','RequestShowCtrl','addComment','user'); //rola admin
     case 'saveComment':
         control('/app/request/window/addComment/','RequestShowCtrl','saveComment','user');
+    case 'newUser':
+        control('/app/request/window/addUser/','AddUserCtrl','showNewUser','admin');
+    case 'addNewUser':
+        control('/app/request/window/addUser/','AddUserCtrl','addNewUser','admin');
 	case 'showListPart': //AJAX - wysłanie samej tabeli HTMLowej
 		control('/app/request/list/','RequestListCtrl','goShowPart','user'); // publiczna
+    case 'showUsersList':
+        control('/app/users/show/', 'UsersListCtrl', 'goShow', 'admin');
+    case 'showUser':
+        control ('/app/users/show/', 'UsersListCtrl', 'goShowUser', 'admin');
+    case 'showEditUser':
+        control ('/app/users/show/', 'UsersListCtrl', 'goShowEdit', 'admin');
+    case 'reloadAddWindow':
+        control('/app/request/window/', 'EditWindowCtrl', 'reload', 'user');
 	default : //'incidentList' akcja domyślna
 		control('/app/request/list/','RequestListCtrl','goShow','user'); // publiczna
 }

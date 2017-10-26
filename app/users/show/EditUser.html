@@ -1,0 +1,15 @@
+<form id="editUserForm" class="form">
+    <legend class="legend">Edit user</legend>
+    Username:<br>
+    <input type="text" name="username" class="form_field round" placeholder="{$user['username']}">
+    Password:<br>
+    <input type="text" name="password" class="form_field round">
+    Realname:<br>
+    <input type="text" name="realname" class="form_field round"><br>
+    Roles:<br>
+    {foreach $roles as $r}
+    <input type="checkbox" name="role[]" value='{$r["rid"]}'  class="round">{$r["role"]}<br>
+    {/foreach}
+</form>
+<button class="button request_button" onclick="ajaxPostForm('newUserForm', '{$conf->action_root}addNewUser', 'addWindow')">Save</button>
+<button class="button request_button" onclick="ajaxReloadElement('addWindow', '{$conf->action_root}reloadAddWindow')">Cancel</button>

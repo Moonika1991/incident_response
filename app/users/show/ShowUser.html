@@ -1,0 +1,16 @@
+<header>
+    <span id="user_id">User id: {$uid}</span>
+</header>
+<div id="show_user">
+    Username: {$user["username"]}<br>
+    Realname: {$user["realname"]}<br>
+</div>
+<div id="roles_div">
+    Roles:
+    <ul id="roles">
+        {foreach $roles as $r}
+        <li>{$r["role"]}</li>
+        {/foreach}
+    </ul>
+</div>
+<button class="button button_down" onclick="ajaxReloadElement('addWindow', '{$conf->action_root}showEditUser&uid={$uid}')">Edit</button>

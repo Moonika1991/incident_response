@@ -15,6 +15,11 @@ class RequestListCtrl {
     function setRequestType(){
         $this->types = getDb()->select("req_type", ["rtid", "name"]);
         
+        if (getDB()->error()[0]!=0){ //jeśli istnieje kod błędu
+			getMessages()->addMessage(new Message('Wystąpił błąd podczas pobierania rekordów',Message::ERROR));
+			if (getConf()->debug) getMessages()->addMessage(new Message(var_export(getDB()->error(), true),Message::ERROR));
+		}
+        
         getSmarty()->assign("types", $this->types);
     }
 
@@ -25,7 +30,7 @@ class RequestListCtrl {
                 "req_list.datetime",
                 "roles.role",
                 "req_list.progress",
-			]);
+			], ["ORDER" => ["req_list.datetime" => "DESC"]]);
 		if (getDB()->error()[0]!=0){ //jeśli istnieje kod błędu
 			getMessages()->addMessage(new Message('Wystąpił błąd podczas pobierania rekordów',Message::ERROR));
 			if (getConf()->debug) getMessages()->addMessage(new Message(var_export(getDB()->error(), true),Message::ERROR));

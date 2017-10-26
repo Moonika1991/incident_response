@@ -1,19 +1,19 @@
-<form id="requestAddForm" class="request_form">
-    <legend>Add new request</legend>
+<form id="requestAddForm" class="form">
+    <legend class="legend">Add new request</legend>
     Title: <br>
-    <input type="text"  name="title" class="title"> 
+    <input type="text"  name="title" class="form_field round"> 
     <br>
     Problem description: <br>
-    <input type="text" name="description" class="description">
+    <textarea name="description" class="description round"></textarea>
     <br>
     {if count($conf->roles)>1}
-        <select name="team" class="request_form">
+        <select name="team" class="request_form round">
             {foreach $teams as $t}
                 <option value='{$t["rid"]}'>{$t["role"]}</option>
             {/foreach}
         </select>
     {/if}
-    <select name="type" class="request_form">
+    <select name="type" class="request_form round">
         {foreach $types as $t}
             <option value='{$t["rtid"]}'>{$t["name"]}</option>
         {/foreach}

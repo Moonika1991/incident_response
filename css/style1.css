@@ -11,7 +11,7 @@ table {
    /* margin-left: 50%;*/
     float: left;
     border-collapse: collapse;
-    width: 49%;
+    width: 50%;
     align-self: right;
     }
 table, th, td {
@@ -49,14 +49,13 @@ ul{
 }
 .button_down{
     position: absolute;
-    bottom: 9%;
+    bottom: 0;
     right: 3%;
+    margin-bottom: 0;
 }
 .fieldset{
     border-style: none;
-    position: absolute;
-    top: 15%;
-    right: 1%;
+    float: right;
 }
 .addWindow{
     float: right;
@@ -135,8 +134,14 @@ ul{
     padding-left: 1%;
     border-style: none;
 }
+.no_border{
+    border-style: none;
+    margin: 0;
+    padding: 0;
+}
 #admin_buttons{
     border-style: none;
+    float: left;
 }
 #user_id{
     text-align: center;
@@ -160,4 +165,9 @@ ul{
     padding-left: 5%;
     font-weight: bold;
     
+}
+#view{
+    width: 100%;
+    padding: 0;
+    margin: 0;
 }

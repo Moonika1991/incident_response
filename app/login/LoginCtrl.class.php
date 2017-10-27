@@ -34,18 +34,18 @@ class LoginCtrl{
     }
 		
 	public function validate() {
-		$this->form->login = getFromRequest('login',true,'Błędne wywołanie systemu');
-		$this->form->pass = getFromRequest('pass',true,'Błędne wywołanie systemu');
+		$this->form->login = getFromRequest('login',true,'Invalid system call');
+		$this->form->pass = getFromRequest('pass',true,'Invalid system call');
 
 		//nie ma sensu walidować dalej, gdy brak parametrów
 		if (getMessages()->isError()) return false;
 		
 		// sprawdzenie, czy potrzebne wartości zostały przekazane
 		if (empty($this->form->login)) {
-			getMessages()->addMessage(new Message('Nie podano loginu',Message::ERROR));
+			getMessages()->addMessage(new Message('No login',Message::ERROR));
 		}
 		if (empty($this->form->pass)) {
-			getMessages()->addMessage(new Message('Nie podano hasła',Message::ERROR));
+			getMessages()->addMessage(new Message('No password',Message::ERROR));
 		}
 
 		//nie ma sensu walidować dalej, gdy brak wartości
@@ -64,7 +64,7 @@ class LoginCtrl{
 			//addRole('user');
             //dodanie ról
         } else {
-			getMessages()->addMessage(new Message('Niepoprawny login lub hasło',Message::ERROR));
+			getMessages()->addMessage(new Message('Incorrect login or password',Message::ERROR));
 		}
 		
 		return ! getMessages()->isError();
@@ -73,7 +73,7 @@ class LoginCtrl{
 	public function doLogin(){
 		if ($this->validate()){
 			//zalogowany => przekieruj na główną akcję (z przekazaniem messages przez sesję)
-			getMessages()->addMessage(new Message('Poprawnie zalogowano do systemu',Message::INFO));
+			getMessages()->addMessage(new Message('Log in to the system correctly',Message::INFO));
 			storeMessages();
 			redirectTo("incidentList");
 		} else {
@@ -87,7 +87,7 @@ class LoginCtrl{
 		session_destroy();
 		// 2. idź na stronę główną (z przekazaniem messages przez sesję)
 		session_start(); //rozpocznij nową sesję w celu przekazania messages w sesji
-		getMessages()->addMessage(new Message('Poprawnie wylogowano z systemu',Message::INFO));
+		getMessages()->addMessage(new Message('Correctly logged out of the system',Message::INFO));
 		storeMessages();
 		redirectTo('incidentList');
 	}

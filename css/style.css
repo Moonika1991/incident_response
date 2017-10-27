@@ -11,7 +11,9 @@
 .info{ background-color: #afa; }
 
 .bottom-margin{
-	margin-bottom: 1em;
+    position: relative;  
+    width:90%;
+    bottom:0;
 }
 
 .top-margin{

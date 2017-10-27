@@ -9,36 +9,53 @@ class RequestAddCtrl{
         $this->form = new RequestAddForm();
     }
     public function validate(){
-        $this->form->title = getFromRequest('title');
-        $this->form->description = getFromRequest('description');
-        $this->form->type = getFromRequest('type');
+        $this->form->title = getFromRequest('title',true,'Invalid system call');
+        $this->form->description = getFromRequest('description',true,'Invalid system call');
+        $this->form->type = getFromRequest('type',true,'Invalid system call');
         
         if (inRole('helpdesk')){
-            $this->form->team = getFromRequest('team');
+            $this->form->team = getFromRequest('team',true,'Invalid system call');
         }
         
-        loadMessages();
+        if (empty($this->form->title)) {
+			getMessages()->addMessage(new Message('No title',Message::ERROR));
+        }
+        if (empty($this->form->description)) {
+			getMessages()->addMessage(new Message('No description',Message::ERROR));
+        }
+        
+        if (getMessages()->isError()) return false;
 		
 		return ! getMessages()->isError();
     }
-    function addToDb($title, $description){
+    function addToDb(){
         
-        if(inRole('helpdesk')){
-            getDb()->insert("req_list", ["title" => $title, "datetime" => time(), "description" => $description, "team" => $this->form->team, "progress" => "new", "uid" => getUid(), "rtid" => $this->form->type]);
-        } else {
+        if ($this->validate()){
             
-            getDb()->insert("req_list", ["title" => $title, "datetime" => time(), "description" => $description, "team" => "helpdesk", "solved" => 0, "uid" => getUid(),"rtid" => $this->form->type]);
-        }
+            if(inRole('helpdesk')){
+                getDb()->insert("req_list", ["title" => $this->form->title, "datetime" => time(), "description" => $this->form->description, "team" => $this->form->team, "progress" => "new", "uid" => getUid(), "rtid" => $this->form->type]);
+            } else {
+                getDb()->insert("req_list", ["title" => $this->form->title, "datetime" => time(), "description" => $this->form->description, "team" => "1", "progress" => "new", "uid" => getUid(),"rtid" => $this->form->type]);
+            }
 
         
-        if (getDB()->error()[0]!=0){ //jeśli istnieje kod błędu
-			getMessages()->addMessage(new Message('Wystąpił błąd podczas zapisywania rekordów',Message::ERROR));
-			if (getConf()->debug) getMessages()->addMessage(new Message(var_export(getDB()->error(), true),Message::ERROR));
+            if (getDB()->error()[0]!=0){ //jeśli istnieje kod błędu
+			 getMessages()->addMessage(new Message('An error occurred while saving the records',Message::ERROR));
+			     if (getConf()->debug) getMessages()->addMessage(new Message(var_export(getDB()->error(), true),Message::ERROR));
+            } else {
+                getMessages()->addMessage(new Message('Request added correctly',Message::INFO));
+			     storeMessages();
+            }
+			
+		} else {
+			getMessages()->addMessage(new Message('Error',Message::ERROR));
+			storeMessages();
 		}
+        
     }
-    public function goShowAdd(){
-        $this->validate();
-        $this->addToDb($this->form->title, $this->form->description);
-        getSmarty()->display(getConf()->root_path.'/app/request/window/addRequest/RequestAddSucced.html'); 
+    function goShowAdd(){
+        $this->addToDb();
+        loadMessages();
+        getSmarty()->display(getConf()->root_path.'/app/showMessages.html'); 
     }
 }

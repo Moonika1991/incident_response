@@ -7,6 +7,12 @@ class RequestListCtrl {
             $this->teams = getDb()->select("roles", ["rid", "role"]);
             unset($this->teams[0]);
             unset($this->teams[1]);
+            
+            if (getDB()->error()[0]!=0){ //jeśli istnieje kod błędu
+                getMessages()->addMessage(new Message('Wystąpił błąd podczas pobierania rekordów',Message::ERROR));
+                if (getConf()->debug) 
+                    getMessages()->addMessage(new Message(var_export(getDB()->error(), true),Message::ERROR));
+            }
         
             getSmarty()->assign('teams', $this->teams);
         }
@@ -16,7 +22,7 @@ class RequestListCtrl {
         $this->types = getDb()->select("req_type", ["rtid", "name"]);
         
         if (getDB()->error()[0]!=0){ //jeśli istnieje kod błędu
-			getMessages()->addMessage(new Message('Wystąpił błąd podczas pobierania rekordów',Message::ERROR));
+			getMessages()->addMessage(new Message('An error occurred while retrieving records',Message::ERROR));
 			if (getConf()->debug) getMessages()->addMessage(new Message(var_export(getDB()->error(), true),Message::ERROR));
 		}
         
@@ -32,7 +38,7 @@ class RequestListCtrl {
                 "req_list.progress",
 			], ["ORDER" => ["req_list.datetime" => "DESC"]]);
 		if (getDB()->error()[0]!=0){ //jeśli istnieje kod błędu
-			getMessages()->addMessage(new Message('Wystąpił błąd podczas pobierania rekordów',Message::ERROR));
+			getMessages()->addMessage(new Message('An error occurred while retrieving records',Message::ERROR));
 			if (getConf()->debug) getMessages()->addMessage(new Message(var_export(getDB()->error(), true),Message::ERROR));
 		}
 
@@ -42,6 +48,7 @@ class RequestListCtrl {
 	}
 	
 	function goShow(){
+        loadMessages();
 		$this->process();
 		getSmarty()->display(getConf()->root_path.'/app/request/list/RequestView.html',false);
 	}

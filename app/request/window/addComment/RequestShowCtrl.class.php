@@ -58,6 +58,7 @@ class RequestShowCtrl{
     }
     
     public function goShow(){
+        loadMessages();
         $this->getFromDb();
         getSmarty()->display(getConf()->root_path.'/app/request/window/addComment/RequestShow.html');
     }

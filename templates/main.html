@@ -17,23 +17,10 @@
         {if count($conf->roles)>0}
 	   <span>Logged as {$realname}</span>
 	   <a href="{$conf->action_root}logout" class="pure-menu-heading pure-menu-link">Logout</a>
-        <fieldset class="fieldset">
-        <button class="button" onclick="ajaxReloadElement('addWindow', '{$conf->action_root}newRequest')">Add new request</button>
-        {if inRole("admin")}
-        <button class="button" onclick="ajaxReloadElement('addWindow', '{$conf->action_root}newUser')">Add new user</button>                 
-        {/if}
-        </fieldset>
         {else}	
 	   <a href="{$conf->action_root}loginShow" class="pure-menu-heading pure-menu-link">Zaloguj</a>
         {/if}
     </div>
-    
-    {if inRole("admin")}
-    <fieldset id="admin_buttons">
-        <button class="button" onclick="ajaxReloadElement('tab_inc_list', '{$conf->action_root}showListPart'); ajaxReloadElement('addWindow', '{$conf->action_root}reloadAddWindow')">Requests list</button>
-        <button class="button" onclick=" ajaxReloadElement('addWindow', '{$conf->action_root}reloadAddWindow'); ajaxReloadElement('tab_inc_list', '{$conf->action_root}showUsersList')">Users list</button>
-    </fieldset>
-    {/if}
 
 {block name=top} {/block}
 

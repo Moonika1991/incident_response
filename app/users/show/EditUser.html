@@ -3,13 +3,19 @@
     Username:<br>
     <input type="text" name="username" class="form_field round" placeholder="{$user['username']}">
     Password:<br>
-    <input type="text" name="password" class="form_field round">
+    <input type="text" name="password" class="form_field round" placeholder="new password">
     Realname:<br>
-    <input type="text" name="realname" class="form_field round"><br>
-    Roles:<br>
+    <input type="text" name="realname" class="form_field round" placeholder="{$user['realname']}"><br>
+    Roles to remove:<br>
     {foreach $roles as $r}
     <input type="checkbox" name="role[]" value='{$r["rid"]}'  class="round">{$r["role"]}<br>
     {/foreach}
+    Roles to add:<br>
+    {foreach $rolesToAdd as $r}
+    <input type="checkbox" name="roleToAdd[]" value='{$r["rid"]}'  class="round">{$r["role"]}<br>
+    {/foreach}
 </form>
-<button class="button request_button" onclick="ajaxPostForm('newUserForm', '{$conf->action_root}addNewUser', 'addWindow')">Save</button>
-<button class="button request_button" onclick="ajaxReloadElement('addWindow', '{$conf->action_root}reloadAddWindow')">Cancel</button>
+<fieldset class="down_left">
+    <button class="button request_button" onclick="ajaxPostForm('editUserForm', '{$conf->action_root}saveEditUser&uid={$uid}', 'addWindow'); ajaxReloadElement('tab_inc_list', '{$conf->action_root}showUsersList')">Save</button>
+    <button class="button request_button" onclick="ajaxReloadElement('addWindow', '{$conf->action_root}reloadAddWindow')">Cancel</button>
+</fieldset>

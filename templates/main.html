@@ -18,7 +18,7 @@
 	   <span>Logged as {$realname}</span>
 	   <a href="{$conf->action_root}logout" class="pure-menu-heading pure-menu-link">Logout</a>
         <fieldset class="fieldset">
-        <button class="button" onclick="ajaxReloadElement('addWindow', '{$conf->action_root}newRequest')">Add new</button>
+        <button class="button" onclick="ajaxReloadElement('addWindow', '{$conf->action_root}newRequest')">Add new request</button>
         {if inRole("admin")}
         <button class="button" onclick="ajaxReloadElement('addWindow', '{$conf->action_root}newUser')">Add new user</button>                 
         {/if}

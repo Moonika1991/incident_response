@@ -44,6 +44,8 @@ switch ($action){
         control ('/app/users/show/', 'UsersListCtrl', 'goShowUser', 'admin');
     case 'showEditUser':
         control ('/app/users/show/', 'UsersListCtrl', 'goShowEdit', 'admin');
+    case 'saveEditUser':
+        control ('/app/users/show/', 'UsersListCtrl', 'goShowSave', 'admin');
     case 'reloadAddWindow':
         control('/app/request/window/', 'EditWindowCtrl', 'reload', 'user');
 	default : //'incidentList' akcja domyślna

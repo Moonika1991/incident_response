@@ -125,6 +125,16 @@ ul{
     width: 100%;
     height: 100%;
 }
+.roles{
+    padding: 0;
+    margin-top: 0;
+    margin-left: 5%;
+    list-style-type: disc;
+}
+.down_left{
+    padding-left: 1%;
+    border-style: none;
+}
 #admin_buttons{
     border-style: none;
 }
@@ -145,12 +155,6 @@ ul{
     padding-top: 7%;
     line-height: 3em;
     font-weight: bold;
-}
-#roles{
-    padding: 0;
-    margin-top: 0;
-    margin-left: 5%;
-    list-style-type: disc;
 }
 #roles_div{
     padding-left: 5%;

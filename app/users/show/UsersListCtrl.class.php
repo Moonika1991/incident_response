@@ -35,7 +35,7 @@ class UsersListCtrl{
         $this->roles = getDb()->select("roles", ["[>]user_role" => ["rid" => "rid"]], ["roles.rid","roles.role"], ["user_role.uid" => $this->uid] );
         
         if (getDB()->error()[0]!=0){ //jeśli istnieje kod błędu
-			getMessages()->addMessage(new Message('Wystąpił błąd podczas pobierania rekordów',Message::ERROR));
+			getMessages()->addMessage(new Message('An error occurred while retrieving records',Message::ERROR));
 			if (getConf()->debug) getMessages()->addMessage(new Message(var_export(getDB()->error(), true),Message::ERROR));
 		}
         
@@ -84,13 +84,16 @@ class UsersListCtrl{
         if($this->form->rolesToAdd != NULL){
             foreach ($this->form->rolesToAdd as $r){
             getDb()->insert("user_role", ["uid" => $this->uid, "rid" => $r]);
-        }
+            }
         }
         
         if (getDB()->error()[0]!=0){ //jeśli istnieje kod błędu
-			getMessages()->addMessage(new Message('Wystąpił błąd podczas pobierania rekordów',Message::ERROR));
+			getMessages()->addMessage(new Message('An error occured while saving',Message::ERROR));
 			if (getConf()->debug) getMessages()->addMessage(new Message(var_export(getDB()->error(), true),Message::ERROR));
-        }
+        } else
+            getMessages()->addMessage(new Message('Changes saved correctly',Message::INFO));
+        
+        storeMessages();
     }
     
     function goShow(){
@@ -114,6 +117,7 @@ class UsersListCtrl{
         $this->setUid();
         $this->validate();
         $this->updateDb();
-        getSmarty()->display(getConf()->root_path.'/app/request/window/addUser/success.html');
+        loadMessages();
+        getSmarty()->display(getConf()->root_path.'/app/showMessages.html'); 
     }
 }

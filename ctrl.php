@@ -22,6 +22,10 @@ switch ($action){
 		control('/app/login/','LoginCtrl','doLogin'); // publiczna
 	case 'logout':
 		control('/app/login/','LoginCtrl','doLogout'); // publiczna
+    case 'changePassword':
+        control('/app/login/password/', 'PasswordChangeCtrl', 'changePassword', 'user');
+    case 'savePassword':
+        control('/app/login/password/', 'PasswordChangeCtrl', 'savePass', 'user');
 	case 'newRequest':
 		control('/app/request/list/','RequestListCtrl','goShowNew','user'); //rola user
     case 'searchRequest':

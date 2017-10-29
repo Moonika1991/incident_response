@@ -17,8 +17,9 @@
         {if count($conf->roles)>0}
 	   <span>Logged as {$realname}</span>
 	   <a href="{$conf->action_root}logout" class="pure-menu-heading pure-menu-link">Logout</a>
+        <a href="{$conf->action_root}changePassword" class="pure-menu-heading pure-menu-link">Change password</a>
         {else}	
-	   <a href="{$conf->action_root}loginShow" class="pure-menu-heading pure-menu-link">Zaloguj</a>
+	   <a href="{$conf->action_root}loginShow" class="pure-menu-heading pure-menu-link">Log in</a>
         {/if}
     </div>
 

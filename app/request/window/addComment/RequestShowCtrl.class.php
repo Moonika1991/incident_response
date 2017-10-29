@@ -29,9 +29,11 @@ class RequestShowCtrl{
         getDb()->insert("comments", ["req" => $reqid, "user" => getUid(), "comment" => $comment, "date" => date("Y-m-d h:i:sa")]);
         
         if (getDB()->error()[0]!=0){ //jeśli istnieje kod błędu
-			getMessages()->addMessage(new Message('Wystąpił błąd podczas pobierania rekordów',Message::ERROR));
+			getMessages()->addMessage(new Message('An error occurred while saving',Message::ERROR));
 			if (getConf()->debug) getMessages()->addMessage(new Message(var_export(getDB()->error(), true),Message::ERROR));
 		}
+        
+        storeMessages();
     }
     
     public function getFromDB(){

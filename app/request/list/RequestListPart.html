@@ -1,4 +1,8 @@
-<table id="tab_inc_list">
+<form id="searchForm" class="search">
+    <input type="text" placeholder="Request number..." name="search" class="round">  
+</form>
+<button class="button" onclick="ajaxPostForm('searchForm','{$conf->action_root}searchRequest', 'tab_inc_list')"  class="search"><img src="/incident_response/app/request/list/search.png" alt="Search"  id="icon"></button>
+<table id="req_tab">
 <thead>
 	<tr>
         <th>Request number</th>
@@ -22,3 +26,4 @@
 {/foreach}
 </tbody>
 </table>
+

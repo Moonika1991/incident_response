@@ -24,14 +24,18 @@ switch ($action){
 		control('/app/login/','LoginCtrl','doLogout'); // publiczna
 	case 'newRequest':
 		control('/app/request/list/','RequestListCtrl','goShowNew','user'); //rola user
+    case 'searchRequest':
+        control('/app/request/list/', 'RequestListCtrl', 'search');
 	case 'addRequest':
 		control('/app/request/window/addRequest/','RequestAddCtrl','goShowAdd','user'); //rola user
 	case 'showRequest':
 		control('/app/request/window/addComment/','RequestShowCtrl','goShow','user'); //rola user
 	case 'addComment':
-		control('/app/request/window/addComment/','RequestShowCtrl','addComment','user'); //rola admin
+		control('/app/request/window/addComment/','RequestShowCtrl','addComment','user');
     case 'saveComment':
         control('/app/request/window/addComment/','RequestShowCtrl','saveComment','user');
+    case 'editRequest':
+        control('/app/request/window/addComment/','RequestShowCtrl','editRequest','helpdesk');
     case 'newUser':
         control('/app/request/window/addUser/','AddUserCtrl','showNewUser','admin');
     case 'addNewUser':

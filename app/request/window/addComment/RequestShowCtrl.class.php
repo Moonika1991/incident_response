@@ -74,4 +74,14 @@ class RequestShowCtrl{
         $this->goShow();
         //getSmarty()->display(getConf()->root_path.'/app/request/window/addComment/RequestShow.html');
     }
+    public function editRequest(){
+        $this->progress = getFromGet('p');
+        
+        $this->getFromDb();
+        
+        
+        getDb()->update("req_list", ["progress" => $this->progress], ["reqid" => $this->reqid]);
+        
+        getSmarty()->display(getConf()->root_path.'/app/request/window/addComment/RequestShow.html');
+    }
 }

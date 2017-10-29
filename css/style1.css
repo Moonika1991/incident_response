@@ -9,10 +9,8 @@ h1 {
     }
 table {
    /* margin-left: 50%;*/
-    float: left;
     border-collapse: collapse;
-    width: 50%;
-    align-self: right;
+    width: 100%;
     }
 table, th, td {
     text-align: center;
@@ -139,7 +137,10 @@ ul{
     margin: 0;
     padding: 0;
 }
-#admin_buttons{
+.search{
+    display: inline;
+}
+#left_buttons{
     border-style: none;
     float: left;
 }
@@ -170,4 +171,14 @@ ul{
     width: 100%;
     padding: 0;
     margin: 0;
+}
+#icon{
+    width: 1em;
+    height: 1em;
+}
+#tab_inc_list{
+    padding: 0;
+    margin 0;
+    width: 50%;
+    float:left;
 }

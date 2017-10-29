@@ -24,7 +24,14 @@
     </div>
 </div>
 <footer>
-    <button class="button button_down" onclick="ajaxReloadElement('comment', '{$conf->action_root}addComment&reqid={$reqid}')">Add comment</button>
+    <fielset class="button_down">
+        {if inRole('helpdesk')}
+        <button class="button" onclick="ajaxReloadElement('addWindow', '{$conf->action_root}editRequest&p=accepted&reqid={$reqid}'); ajaxReloadElement('tab_inc_list', '{$conf->action_root}showListPart')">Accept</button>
+         <button class="button" onclick="ajaxReloadElement('addWindow', '{$conf->action_root}editRequest&p=solved&reqid={$reqid}'); ajaxReloadElement('tab_inc_list', '{$conf->action_root}showListPart')">Solved</button>
+        {/if}
+        <button class="button" onclick="ajaxReloadElement('comment', '{$conf->action_root}addComment&reqid={$reqid}')">Add comment</button>
+    </fielset>
+    
 </footer>
 
     

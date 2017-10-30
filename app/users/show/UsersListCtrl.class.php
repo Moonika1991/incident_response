@@ -120,4 +120,8 @@ class UsersListCtrl{
         loadMessages();
         getSmarty()->display(getConf()->root_path.'/app/showMessages.html'); 
     }
+    function resetPass(){
+        $this->setUid();
+        getSmarty()->display(getConf()->root_path.'/app/users/password/PasswordReset.html');
+    }
 }

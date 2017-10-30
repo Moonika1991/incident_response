@@ -25,7 +25,7 @@ class AddUserCtrl{
         $this->roles = getDb()->select("roles", ["rid", "role"]);
         
         if (getDB()->error()[0]!=0){ //jeśli istnieje kod błędu
-			getMessages()->addMessage(new Message('Wystąpił błąd podczas pobierania rekordów',Message::ERROR));
+			getMessages()->addMessage(new Message('An error occurred while retrieving records',Message::ERROR));
 			if (getConf()->debug) getMessages()->addMessage(new Message(var_export(getDB()->error(), true),Message::ERROR));
 		}
         
@@ -45,9 +45,13 @@ class AddUserCtrl{
         }
         
         if (getDB()->error()[0]!=0){ //jeśli istnieje kod błędu
-			getMessages()->addMessage(new Message('Wystąpił błąd podczas zapisywania rekordów',Message::ERROR));
+			getMessages()->addMessage(new Message('An error occurred while saving',Message::ERROR));
 			if (getConf()->debug) getMessages()->addMessage(new Message(var_export(getDB()->error(), true),Message::ERROR));
-		}
+		} else {
+            getMessages()->addMessage(new Message('User added correctly',Message::INFO)); 
+        }
+        
+        storeMessages();
     }
     
     public function showNewUser(){
@@ -57,6 +61,7 @@ class AddUserCtrl{
     
     public function addNewUser(){
         $this->addToDb();
-        getSmarty()->display(getConf()->root_path.'/app/request/window/addUser/success.html');
+        loadMessages();
+        getSmarty()->display(getConf()->root_path.'/app/showMessages.html'); 
     }
 }

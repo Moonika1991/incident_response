@@ -47,7 +47,7 @@ class RequestShowCtrl{
         //die();
         
         if (getDB()->error()[0]!=0){ //jeśli istnieje kod błędu
-			getMessages()->addMessage(new Message('Wystąpił błąd podczas pobierania rekordów',Message::ERROR));
+			getMessages()->addMessage(new Message('An error occurred while retrieving records',Message::ERROR));
 			if (getConf()->debug) getMessages()->addMessage(new Message(var_export(getDB()->error(), true),Message::ERROR));
 		}
         
@@ -74,7 +74,6 @@ class RequestShowCtrl{
         $this->setReqid();
         $this->addToDb($this->form->comment, $this->reqid);
         $this->goShow();
-        //getSmarty()->display(getConf()->root_path.'/app/request/window/addComment/RequestShow.html');
     }
     public function editRequest(){
         $this->progress = getFromGet('p');

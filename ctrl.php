@@ -56,6 +56,10 @@ switch ($action){
         control ('/app/users/show/', 'UsersListCtrl', 'goShowSave', 'admin');
     case 'reloadAddWindow':
         control('/app/request/window/', 'EditWindowCtrl', 'reload', 'user');
+    case 'showResetPass':
+        control('/app/users/show/', 'UsersListCtrl', 'resetPass', 'helpdesk');
+    case 'saveReset':
+        control('/app/users/password/', 'PasswordResetCtrl', 'saveReset', 'helpdesk');
 	default : //'incidentList' akcja domyślna
 		control('/app/request/list/','RequestListCtrl','goShow','user'); // publiczna
 }

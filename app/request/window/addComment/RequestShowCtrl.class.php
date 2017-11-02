@@ -15,7 +15,14 @@ class RequestShowCtrl{
     public function validate(){
         $this->form->comment = getFromRequest('comment');
         
-        loadMessages();
+        if(empty($this->form->comment)){
+            getMessages()->addMessage(new Message('No comment',Message::ERROR));
+        }
+        
+        if (getMessages()->isError()) return false;
+        
+        storeMessages();
+        
         return !getMessages()->isError();
     }
     
@@ -24,16 +31,22 @@ class RequestShowCtrl{
         getSmarty()->assign('reqid', $this->reqid);
     }
     
-    public function addToDb($comment, $reqid){
+    public function addToDb(){
         
-        getDb()->insert("comments", ["req" => $reqid, "user" => getUid(), "comment" => $comment, "date" => date("Y-m-d h:i:sa")]);
+        if($this->validate()){
+             getDb()->insert("comments", ["req" => $this->reqid, "user" => getUid(), "comment" => $this->form->comment, "date" => date("Y-m-d h:i:sa")]);
         
-        if (getDB()->error()[0]!=0){ //jeśli istnieje kod błędu
-			getMessages()->addMessage(new Message('An error occurred while saving',Message::ERROR));
-			if (getConf()->debug) getMessages()->addMessage(new Message(var_export(getDB()->error(), true),Message::ERROR));
-		}
+            if (getDB()->error()[0]!=0){ //jeśli istnieje kod błędu
+                getMessages()->addMessage(new Message('An error occurred while saving',Message::ERROR));
+            if (getConf()->debug) getMessages()->addMessage(new Message(var_export(getDB()->error(), true),Message::ERROR));
+            
+            }
+            $this->goShow();
+        } else 
+            getSmarty()->display(getConf()->root_path.'/app/showMessages.html');
         
         storeMessages();
+    
     }
     
     public function getFromDB(){
@@ -70,10 +83,8 @@ class RequestShowCtrl{
         getSmarty()->display(getConf()->root_path.'/app/request/window/addComment/AddComment.html');
     }
     public function saveComment(){
-        $this->validate();
         $this->setReqid();
-        $this->addToDb($this->form->comment, $this->reqid);
-        $this->goShow();
+        $this->addToDb();
     }
     public function editRequest(){
         $this->progress = getFromGet('p');

@@ -29,7 +29,7 @@ switch ($action){
 	case 'newRequest':
 		control('/app/request/list/','RequestListCtrl','goShowNew','user'); //rola user
     case 'searchRequest':
-        control('/app/request/list/', 'RequestListCtrl', 'search');
+        control('/app/request/list/', 'RequestListCtrl', 'search', 'user');
 	case 'addRequest':
 		control('/app/request/window/addRequest/','RequestAddCtrl','goShowAdd','user'); //rola user
 	case 'showRequest':

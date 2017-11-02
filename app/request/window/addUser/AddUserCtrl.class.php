@@ -16,7 +16,22 @@ class AddUserCtrl{
         $this->form->realname = getFromRequest('realname');
         $this->form->role = getFromRequest('role');
         
-        loadMessages();
+        if (empty($this->form->username)) {
+			getMessages()->addMessage(new Message('No username',Message::ERROR));
+        }
+        if (empty($this->form->password)) {
+			getMessages()->addMessage(new Message('No password',Message::ERROR));
+        }
+        if (empty($this->form->realname)) {
+			getMessages()->addMessage(new Message('No realname',Message::ERROR));
+        }
+        if (empty($this->form->role)) {
+			getMessages()->addMessage(new Message('No role selected',Message::ERROR));
+        }
+        
+        if (getMessages()->isError()) return false;
+        
+        storeMessages();
 		
 		return ! getMessages()->isError();
     }
@@ -34,23 +49,24 @@ class AddUserCtrl{
     
     function addToDb(){
         
-        $this->validate();
+        if($this->validate()){
+             getDb()->insert("users", ["username" => $this->form->username, "password" => $this->form->password, "realname" => $this->form->realname]);
         
-        getDb()->insert("users", ["username" => $this->form->username, "password" => $this->form->password, "realname" => $this->form->realname]);
+            $this->uid = getDb()->select("users", ["uid"], ["username" => $this->form->username])[0]["uid"];
         
-        $this->uid = getDb()->select("users", ["uid"], ["username" => $this->form->username])[0]["uid"];
+            foreach ($this->form->role as $r){
+                getDb()->insert("user_role", ["uid" => $this->uid, "rid" => $r]);
+            }
         
-        foreach ($this->form->role as $r){
-            getDb()->insert("user_role", ["uid" => $this->uid, "rid" => $r]);
+            if (getDB()->error()[0]!=0){ //jeśli istnieje kod błędu
+                getMessages()->addMessage(new Message('An error occurred while saving',Message::ERROR));
+                if (getConf()->debug) getMessages()->addMessage(new Message(var_export(getDB()->error(), true),Message::ERROR));
+            } else {
+                getMessages()->addMessage(new Message('User added correctly',Message::INFO)); 
+            }   
+            
         }
-        
-        if (getDB()->error()[0]!=0){ //jeśli istnieje kod błędu
-			getMessages()->addMessage(new Message('An error occurred while saving',Message::ERROR));
-			if (getConf()->debug) getMessages()->addMessage(new Message(var_export(getDB()->error(), true),Message::ERROR));
-		} else {
-            getMessages()->addMessage(new Message('User added correctly',Message::INFO)); 
-        }
-        
+               
         storeMessages();
     }
     
